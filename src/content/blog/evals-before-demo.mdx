@@ -1,0 +1,48 @@
+---
+title: "Build the eval before the demo"
+summary: "Every AI project that went sideways on us had the same shape: an impressive demo in week one, and no way to tell whether week six was better or worse."
+author: "Your Name"
+readingMinutes: 5
+publishedAt: "2026-06-18"
+---
+
+The demo is the easy part. That's the trap.
+
+A language model plus a decent prompt will produce something that looks like a
+working product in an afternoon. Everyone in the room gets excited. Then you
+spend four months making it actually reliable, and for every one of those weeks
+you have no idea whether the change you just shipped made things better.
+
+## What "better" means without an eval
+
+Nothing. It means the last three examples someone tried in the Slack channel
+looked fine.
+
+This is not a small problem. It's the difference between engineering and
+gambling, and it's why so many AI projects stall at 80% — not because the last
+20% is technically hard, but because nobody can see it.
+
+## What we do instead
+
+**Week one: the eval set.** Before any retrieval, any prompt tuning, any
+architecture. We sit with the people who will use the thing and write down
+questions with known-correct answers.
+
+Two rules for that set:
+
+- It includes the cases where the right answer is "I don't know." A system that
+  never abstains is a system that fabricates.
+- It's written by the domain expert, not the engineer. Engineers write questions
+  the system can answer.
+
+**Then: a number, every commit.** Once the eval runs in CI, "did that help?"
+becomes a question with an answer.
+
+## The uncomfortable part
+
+Sometimes the eval tells you the model isn't the right tool. We've had two
+projects where the honest reading was that a database query and a good form
+would beat anything a model could do, and we said so.
+
+That's a worse quarter for us and a better year for the client. It's also the
+only reason our recommendations are worth anything.

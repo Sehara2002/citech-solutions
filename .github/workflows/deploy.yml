@@ -26,7 +26,8 @@ jobs:
         run: |
           cp -r public .next/standalone/public
           cp -r .next/static .next/standalone/.next/static
-          cp -r src/content .next/standalone/src/content
+          mkdir -p .next/standalone/src/content
+          cp -r src/content/. .next/standalone/src/content/ 2>/dev/null || true
           cp server.js .next/standalone/server.js
           mkdir -p .next/standalone/tmp
 
