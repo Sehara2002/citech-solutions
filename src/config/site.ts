@@ -3,7 +3,7 @@
  * propagates to nav, footer, metadata, OG cards, JSON-LD, and sitemap.
  */
 export const SITE = {
-  name: "CiTech",
+  name: "CiTech Software Solutions",
   legalName: "CiTech Software Solutions (Pvt) Ltd",
   tagline: "Software and AI systems, drawn before they're built.",
   description:
