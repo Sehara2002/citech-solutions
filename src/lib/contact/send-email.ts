@@ -1,13 +1,29 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import type { ContactInput } from "./schema";
 
-/** The only place Resend is touched. */
-export async function sendContactEmail(data: ContactInput) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
+/**
+ * The only place SMTP is touched. Module scope on purpose — the transporter
+ * gets reused across warm invocations instead of reconnecting every time.
+ */
+const port = Number(process.env.SMTP_PORT ?? 465);
 
-  await resend.emails.send({
-    from: process.env.CONTACT_FROM_EMAIL!,
-    to: process.env.CONTACT_TO_EMAIL!,
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port,
+  secure: port === 465, // 465 = implicit TLS. 587 = STARTTLS, so false.
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
+
+export async function sendContactEmail(data: ContactInput) {
+  await transporter.sendMail({
+    /* MUST be the authenticated mailbox. Hostinger rejects any other From
+       address outright — you can't send as noreply@ from a contact@ box. */
+    from: `"CITECH website" <${process.env.SMTP_USER}>`,
+    to: process.env.CONTACT_TO_EMAIL,
+    /* So hitting Reply in your inbox goes to the visitor, not to yourself. */
     replyTo: data.email,
     subject: `New enquiry — ${data.name}${data.company ? ` (${data.company})` : ""}`,
     text: [
