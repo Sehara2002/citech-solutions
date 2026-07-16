@@ -1,0 +1,25 @@
+/* ============================================================
+   TOKENS — the only place colour, type, and rhythm are defined.
+   ============================================================ */
+
+@theme {
+  /* Colour */
+  --color-paper: #ffffff;
+  --color-wash: #eff4fc;
+  --color-line: #d6e1f2;
+  --color-graphite: #59708e;
+  --color-ink: #06182e;
+  --color-signal: #1550e0;
+  --color-pulse: #00c2ff;
+
+  /* Type */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* Rhythm — section padding, gutters, and the blueprint grid all
+     derive from this, so the drawing stays in register. */
+  --module: 4rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -1,0 +1,71 @@
+/* MDX case studies and posts. */
+
+@layer components {
+  .prose {
+    max-width: 42rem;
+  }
+
+  .prose > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .prose h2 {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 108;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .prose h3 {
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-top: 2rem;
+  }
+
+  .prose p,
+  .prose li {
+    color: var(--color-graphite);
+    text-wrap: pretty;
+  }
+
+  .prose strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .prose a {
+    color: var(--color-signal);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose ul {
+    padding-left: 1.125rem;
+    list-style: none;
+  }
+
+  .prose li {
+    position: relative;
+  }
+
+  .prose ul > li::before {
+    content: "";
+    position: absolute;
+    left: -1.125rem;
+    top: 0.7em;
+    width: 6px;
+    height: 1px;
+    background-color: var(--color-signal);
+  }
+
+  .prose blockquote {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--color-signal);
+    font-size: 1.125rem;
+    color: var(--color-ink);
+  }
+}

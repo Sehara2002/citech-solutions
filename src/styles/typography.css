@@ -1,0 +1,47 @@
+/* Three display sizes. If a heading needs a fourth, the page
+   structure is wrong, not the scale. */
+
+@layer components {
+  .display-xl,
+  .display-lg,
+  .display-md {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 112;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  .display-xl {
+    font-size: clamp(2.75rem, 7.5vw, 6.5rem);
+  }
+
+  .display-lg {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+  }
+
+  .display-md {
+    font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  /* How a technical drawing names its parts. Reads as a callout,
+     never as a heading. */
+  .annotation {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-graphite);
+  }
+
+  .lede {
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--color-graphite);
+    text-wrap: pretty;
+  }
+}
