@@ -1,0 +1,54 @@
+name: Deploy to InterServer
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # lets you deploy manually from the Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22    # match the Selector
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      # standalone omits static assets and content — we bring them in ourselves.
+      # Miss this and you get an unstyled site with no images.
+      - name: Assemble bundle
+        run: |
+          cp -r public .next/standalone/public
+          cp -r .next/static .next/standalone/.next/static
+          cp -r src/content .next/standalone/src/content
+          cp server.js .next/standalone/server.js
+          mkdir -p .next/standalone/tmp
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Upload
+        run: |
+          rsync -az --delete \
+            --exclude 'tmp/' \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key" \
+            .next/standalone/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:domains/citech.live/app/
+
+      # Passenger watches this file. Touching it restarts the app —
+      # no panel click, no CLI.
+      - name: Restart
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "mkdir -p domains/citech.live/app/tmp && touch domains/citech.live/app/tmp/restart.txt"
