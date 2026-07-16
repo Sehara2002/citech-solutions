@@ -1,8 +1,6 @@
 import { ImageResponse } from "next/og";
 import { SITE } from "@/config/site";
 
-export const runtime = "edge";
-
 /**
  * Dynamic Open Graph cards, same palette as the site.
  * Try it: /api/og?title=Hello&kind=Note
