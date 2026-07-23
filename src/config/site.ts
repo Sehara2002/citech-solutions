@@ -3,8 +3,8 @@
  * propagates to nav, footer, metadata, OG cards, JSON-LD, and sitemap.
  */
 export const SITE = {
-  name: "CiTech Software Solutions",
-  legalName: "CiTech Software Solutions (Pvt) Ltd",
+  name: "CITECH Software Solutions",
+  legalName: "CITECH Software Solutions (Pvt) Ltd",
   tagline: "Software and AI systems, drawn before they're built.",
   description:
     "We design and ship production software and AI systems for teams who need the thing to actually work.",
@@ -18,6 +18,6 @@ export const SITE = {
 
 export const SOCIALS = {
   linkedin: "https://linkedin.com/company/citech",
-  github: "https://github.com/citech",
-  x: "https://x.com/citech",
+  github: "https://github.com/CitechSoftwareSolutions",
+  instagram: "https://instagram.com/citech",
 } as const;
