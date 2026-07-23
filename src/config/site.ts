@@ -10,8 +10,8 @@ export const SITE = {
     "We design and ship production software and AI systems for teams who need the thing to actually work.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://citech.live",
   email: "contact@citech.live",
-  phone: "+94 77 117 2096",
-  location: "Veyangoda, Sri Lanka",
+  phone: "+94 71 088 8504",
+  location: "Gampaha, Sri Lanka",
   founded: "2026",
   hours: "Mon–Fri, 09:00–18:00 (UTC+5:30)",
 } as const;
