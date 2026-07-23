@@ -1,6 +1,6 @@
 export const BUDGETS = [
-  "Under $10k",
-  "$10k–50k",
-  "$50k+",
+  "LKR 0 - 50000",
+  "LKR 50000 - 100000",
+  "LKR 100000+",
   "Not sure yet",
 ] as const;
